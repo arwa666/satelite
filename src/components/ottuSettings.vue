@@ -1,134 +1,149 @@
-<template id="head" >
-  <v-app>
-  <v-navigation-drawer v-model="drawer" app>
-     <v-list class="main-list">
-          <v-list-item-group v-model="model">
-            <v-list-item>
-              <v-list-item-content>
-                <a class="item-list-main" href="/ottu-transactions">
-                  <v-list-item-title>
-                    <img src="../assets/overview.svg" /><span
-                      >overview</span
-                    ></v-list-item-title
-                  ></a
-                >
-              </v-list-item-content>
-              <v-list-item-content>
-                <a class="item-list-main" href="ottu-subscription">
-                  <v-list-item-title>
-                    <img src="../assets/subscriptions.svg" />
-                    <span> Subscriptions</span></v-list-item-title
-                  ></a
-                >
-              </v-list-item-content>
-     <v-list-item-content class="list-report mobile-report">
-                <div class="report-main">
-                  <v-select
-                  flat
-                    solo-inverted
-                    hide-details
-                     return-object
+<template>
+  <v-card>
+    <v-layout>
+      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
-                    :items="report"
-                    v-model="e1"
-                    label="Reporst"
-                       item-text="state"
-                  ></v-select>
-                </div>
-              </v-list-item-content>
+      <v-app-bar
 
+        prominent
+      >
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <!--
+        <v-toolbar-title>My files</v-toolbar-title>
 
-              <v-list-item-content>
+        <v-spacer></v-spacer>
 
-                <a class="item-list-main" href="">
-                  <v-list-item-title>
-                    <img src="../assets/settings.svg" />
-                    <span> Settings</span></v-list-item-title
-                  ></a
-                >
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-    </v-navigation-drawer>
+        <v-btn variant="text" icon="mdi-magnify"></v-btn>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-btn variant="text" icon="mdi-filter"></v-btn>
 
-      <v-toolbar-title>
+        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
+        <v-toolbar-title>
         <v-img
           alt="ottu Logo"
           class=""
           cover
-          src="img"
+          src="../assets/ottu-logo.svg"
           transition="scale-transition"
           width="97px"
       /></v-toolbar-title>
-
-      <v-card class="d-flex">
-        <v-list class="main-list">
-          <v-list-item-group v-model="model">
-            <v-list-item>
-              <v-list-item-content>
-                <a class="item-list-main" href="/ottu-transactions">
+      <v-list>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
                   <v-list-item-title>
                     <img src="../assets/overview.svg" /><span
                       >overview</span
                     ></v-list-item-title
-                  ></a
+                  >
+              </a>
+          </v-list-item>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
+                  <v-list-item-title>
+                    <img src="../assets/subscriptions.svg" /><span
+                      >Subscriptions</span
+                    ></v-list-item-title
+                  >
+              </a>
+          </v-list-item>
+          <v-list-item>
+            <v-menu>
+              <template v-slot:activator="{ props }">
+                <v-btn
+                  color=""
+                  v-bind="props"
+                  append-icon="$expand"
                 >
-              </v-list-item-content>
-              <v-list-item-content>
-                <router-link class="item-list-main" to="/ottu-subscription" >
-
-                <a>
+                <img src="../assets/reports.svg" />
+                Reports
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in items2"
+                  :key="index"
+                  :value="index"
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
                   <v-list-item-title>
-                    <img src="../assets/subscriptions.svg" />
-                    <span> Subscriptions</span></v-list-item-title
-                  ></a
-                ></router-link>
-              </v-list-item-content>
-
-              <v-list-item-content class="list-report">
-                <div class="report-main">
-
-
-
-                  <v-select
-                    flat
-                    solo-inverted
-                    hide-details
-                     return-object
-
-                    :items="report"
-                    v-model="e1"
-                    label="Reporst"
-                       item-text="state"
-                  ></v-select>
-                </div>
-              </v-list-item-content>
-
-              <v-list-item-content>
-          <router-link class="item-list-main" to="/ottu-settings" >
-
-                  <v-list-item-title>
-                    <img src="../assets/settings.svg" />
-                    <span> Settings</span></v-list-item-title>
-          </router-link>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
+                    <img src="../assets/settings.svg" /><span
+                      >Settings</span
+                    ></v-list-item-title
+                  >
+              </a>
+          </v-list-item>
         </v-list>
-      </v-card>
-    </v-app-bar>
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        location="left"
+        temporary
+      >
+      <v-list>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
+                  <v-list-item-title>
+                    <img src="../assets/overview.svg" /><span
+                      >overview</span
+                    ></v-list-item-title
+                  >
+              </a>
+          </v-list-item>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
+                  <v-list-item-title>
+                    <img src="../assets/subscriptions.svg" /><span
+                      >Subscriptions</span
+                    ></v-list-item-title
+                  >
+              </a>
+          </v-list-item>
+            <v-list-item class="no-underlay">
+               <v-list >
+                <v-list-group value="Users">
+                  <template v-slot:activator="{ props }">
+                    <v-list-item
+                      v-bind="props"
+                      prepend-icon=""
+                      title=""
+                    >
+                       <img src="../assets/reports.svg" />
+                       Reports
+                  </v-list-item>
+                  </template>
 
 
-
-
-
-
-
-    <v-main>
+                  <v-list>
+                    <v-list-item
+                      v-for="([title, icon], i) in admins"
+                      :key="i"
+                      :title="title"
+                      :prepend-icon="icon"
+                      :value="title"
+                    ></v-list-item>
+                  </v-list>
+                </v-list-group>
+              </v-list>
+            </v-list-item>
+          <v-list-item>
+            <a class="item-list-main" href="/ottu-transactions">
+                  <v-list-item-title>
+                    <img src="../assets/settings.svg" /><span
+                      >Settings</span
+                    ></v-list-item-title
+                  >
+              </a>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      <v-main>
       <v-container>
         <div clas="tran-title">
           <h1>Settings</h1>
@@ -154,6 +169,7 @@
               :label="`Enable auto-billing for Ottu's services`"
               v-model="switch1"
               inset
+              color="primary"
             ></v-switch>
           </div>
           <h2>Allow auto-billing for:</h2>
@@ -162,12 +178,14 @@
               :label="`Shopify Billing`"
               v-model="switch2"
               inset
+              color="primary"
             ></v-switch>
           </div>
           <div class="four-set">
             <v-switch
               :label="`Ottu's Yearly Subscription`"
               v-model="switch3"
+              color="primary"
               inset
             ></v-switch>
           </div>
@@ -175,13 +193,192 @@
         </div>
       </v-container>
     </v-main>
-  </v-app>
+    </v-layout>
+  </v-card>
 </template>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  body,html,span,p,h1,li, a{
+    font-family: 'Public Sans', sans-serif !important;
+  }
+</style>
+<style>
 
- <style>
-.v-main {
-  padding: 0 50px 0px 50px !important;
+  .v-application__wrap > header{
+    display:none!important;
+  }
+  .v-main{
+    padding-top: 0px!important;
+  }
+  .v-toolbar{
+    background-color: #302f37!important;
+    z-index:900!important;
+
+  }
+  .v-toolbar .v-toolbar__content{
+    height: 56px!important;
+  }
+  .v-toolbar__content > .v-toolbar-title {
+    margin-inline-start: 16px;
+    width: fit-content;
+    flex: unset;
 }
+.v-main .v-container{
+  padding-top:100px!important;
+}
+.v-main .v-card--variant-elevated{
+  box-shadow:none!important;
+}
+header .v-list{
+  display: flex;
+  margin-inline:auto;
+  background-color: transparent;
+}
+.v-toolbar__content .v-list-item-title{
+  display:flex;
+  align-items: center;
+  color:#fff;
+  gap:10px
+
+}
+.v-toolbar__content a,
+.v-toolbar__content a:hover{
+  text-decoration: none;
+}
+.v-toolbar__content span:nth-child(3){
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap:10px
+}
+.v-btn__append{
+  color:#78777c;
+  width:24px;
+  height:24px;
+  font-size: 24px;
+}
+.v-toolbar__content .v-list-item__underlay{
+  width:calc(100% - 10px);
+  height:50px;
+  background: linear-gradient(92.59deg, #fd8862 -43.41%, #f77d1a 99.75%);
+    border-radius: 10px;
+    z-index: -1;
+    transition: all .3s ease-in-out;
+  left:50%;
+  transform: translateX(-50%) scale(0);
+
+}
+.v-list-item:hover .v-list-item__underlay{
+  transform: translateX(-50%) scale(1);
+}
+.v-toolbar__content{
+  position: relative;
+  z-index: 1;
+}
+.text-primary .v-switch__track{
+  background: #FB923C!important;
+    opacity: 1;
+}
+.text-primary .v-switch__thumb{
+  background-color: #fff!important;
+}
+.v-switch .v-selection-control{
+  flex-direction: row-reverse;
+}
+.second-set .v-label{
+  font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    color: #1A1A1A;
+    padding-top: 18px;
+    opacity:1!important;
+    padding-inline-start: 0px!important;
+}
+.v-input__details{
+  display:none!important;
+}
+.third-set .v-label{
+  font-weight: 400;
+    font-size: 14px!important;
+    color: rgba(26, 26, 26, 1)!important;
+    opacity:1!important;
+    padding-inline-start: 0px!important;
+}
+.four-set .v-label{
+  font-weight: 400;
+    font-size: 14px!important;
+    color: rgba(26, 26, 26, 1)!important;
+    opacity:1!important;
+    padding-inline-start: 0px!important;
+}
+.v-toolbar .v-btn:hover > .v-btn__overlay{
+  display:none!important;
+}
+.v-toolbar .v-btn:focus > .v-btn__overlay{
+  display: none!important;
+}
+@media(min-width:768px){
+  .v-app-bar-nav-icon{
+    display: none!important;
+  }
+
+
+}
+@media(max-width:768px){
+
+  .v-toolbar__content > .v-btn:first-child{
+    width:fit-content!important;
+  }
+  header .v-list{
+    display:none;
+  }
+  .v-toolbar-title{
+    margin-inline:auto;
+    display:flex;
+    margin-inline-start: auto !important;;
+  }
+  .v-navigation-drawer{
+    top:0px!important;
+    height: calc(100% - 0px)!important;
+  }
+  .v-navigation-drawer__content{
+    justify-content: flex-start!important;
+  }
+}
+.v-navigation-drawer__content .v-list-item-title{
+  display:flex;
+  align-items: center;
+  gap:10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+.v-navigation-drawer__content .v-list{
+  width:100%;
+}
+.v-navigation-drawer__content .v-list-item__underlay{
+  width:calc(100% - 10px);
+  height:50px;
+  background: linear-gradient(92.59deg, #fd8862 -43.41%, #f77d1a 99.75%);
+    border-radius: 10px;
+    z-index: -1;
+    transition: all .3s ease-in-out;
+  left:50%;
+  transform: translateX(-50%) scale(0);
+
+}
+.v-navigation-drawer__content .v-list-item:hover .v-list-item__underlay{
+  transform: translateX(-50%) scale(1);
+}
+.v-navigation-drawer__content .v-list-item{
+  position:relative;
+  z-index: 1;
+}
+</style>
+<style>
+/* .v-main {
+  padding: 0 50px 0px 50px !important;
+} */
 .v-menu__content.theme--light.v-menu__content--fixed.menuable__content__active {
   top: 56px !important;
   background: #f9f9f9;
@@ -235,13 +432,13 @@ font-size: 14px!important;
 color: rgba(26, 26, 26, 0.88)!important;
 
 }
-.settings-main .v-input--switch__track.theme--light.primary--text{
+/* .settings-main .v-input--switch__track.theme--light.primary--text{
  background: #FB923C!important;opacity: 1;
 
-}
-.settings-main .theme--light.v-input--switch .v-input--switch__thumb.theme--light.primary--text{
+} */
+/* .settings-main .theme--light.v-input--switch .v-input--switch__thumb.theme--light.primary--text{
   color: #fff!important;
-}
+} */
 .first-set h2{
 font-weight: 600;
 font-size: 18px;
@@ -260,9 +457,9 @@ opacity: 0.7;
 .settings-main .theme--light.v-input--switch .v-input--switch__thumb{
 color: #8083A3;
 }
-.settings-main .v-input--switch--inset .v-input--switch__track{
+/* .settings-main .v-input--switch--inset .v-input--switch__track{
   background: #F5F5FA;opacity: 1;
-}
+} */
 .settings-main .v-input__slot{
   flex-direction: row-reverse;
 }
@@ -361,10 +558,10 @@ body {
 .mobile-year {
   display: none;
 }
-.v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
+/* .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
 .v-application .v-toolbar__extension > .v-btn.v-btn--icon:first-child {
   display: none;
-}
+} */
 .v-toolbar__content,
 .v-toolbar__extension {
   background-color: #302f37;
@@ -398,12 +595,12 @@ body {
   .settings-main .right-set{
     width: 100%;
   }
-  .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
+  /* .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
   .v-application
     .v-toolbar__extension
     > .v-btn.v-btn--icon:first-child {
     display: block;
-  }
+  } */
   .theme--light.v-navigation-drawer {
     display: block;
   }
@@ -422,9 +619,9 @@ body {
     width: 100% !important;
     padding: 25px 15px 15px !important;
   }
-  .v-main{
+  /* .v-main{
     padding: 0 15px !important;
-  }
+  } */
   .main-img {
     width: 100% !important;
   }
@@ -434,9 +631,9 @@ body {
   .sign-in-title {
     font-size: 30px !important;
   }
-  .v-btn {
+  /* .v-btn {
     width: 100% !important;
-  }
+  } */
 }
 
 @media (max-width: 575px) {
@@ -524,11 +721,11 @@ body {
 .theme--light.v-expansion-panels .v-expansion-panel:not(:first-child)::after {
   border-color: transparent;
 }
-.v-list-item__content {
+/* .v-list-item__content {
   width: 100%;
   height: 56px;
   margin: 0 12px;
-}
+} */
 .v-input--dense > .v-input__control > .v-input__slot {
   width: 150px;
   height: 37px;
@@ -928,20 +1125,20 @@ table tr:nth-child(even) {
 .theme--light.v-navigation-drawer {
   display: none;
 }
-.v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
+/* .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
 .v-application .v-toolbar__extension > .v-btn.v-btn--icon:first-child {
   display: none;
-}
+} */
 .theme--light.v-list-item:hover::before{
   opacity: 0;
 }
 @media (max-width:991px) {
-    .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
+    /* .v-application .v-toolbar__content > .v-btn.v-btn--icon:first-child,
   .v-application
     .v-toolbar__extension
     > .v-btn.v-btn--icon:first-child {
     display: block;
-  }
+  } */
     .item-list-main .v-list-item__title {
     justify-content: start!important;
   }
@@ -980,12 +1177,12 @@ display: none!important;
     background: #302f37;
   }
 
-  .v-toolbar__content,
+  /* .v-toolbar__content,
 .v-toolbar__extension {
   background-color: #302f37;
       width:50%!important
 
-}
+} */
 }
 .report-main .v-input.v-input--hide-details.theme--light.v-text-field.v-text-field--single-line.v-text-field--solo.v-text-field--solo-inverted.v-text-field--solo-flat.v-text-field--is-booted.v-text-field--enclosed.v-select:before{
   content: '';
@@ -1021,491 +1218,100 @@ display: none!important;
 .v-app-bar {
   display: block !important;
 }
+
+</style>
+<style>
+  .v-navigation-drawer .v-list-item__content{
+    height:unset
+  }
+  .v-list-group .v-list-item__underlay{
+    display:none;
+  }
+  .no-underlay .v-list-item__underlay{
+    display:none!important;
+  }
+  .v-list-group .v-list-item{
+    padding-inline-start: 0px!important;
+  }
+  .no-underlay .v-list-item .v-list-item__content{
+      display:flex;
+      align-items: center;
+      margin-inline-start: 0px;
+      gap:10px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+  }
+  .no-underlay  .v-list-item__append{
+    color: #fff;
+  }
+  .no-underlay .v-list-item__prepend{
+    color:#fff;
+  }
+  @media(max-width:992px){
+
+    .v-toolbar .v-list-item{
+      width: fit-content;
+        padding-inline-start: 10px!important;
+    padding-inline-end: 10px!important;
+    }
+    .v-list-item button{
+      padding-inline:0px
+    }
+  }
 </style>
 
 <script>
-import imgUrl from "../assets/ottu-logo.svg";
-export default {
-  name: "ottu-transactions",
-
-  methods: {
-    getColor(DueDate) {
-      if (DueDate != "22.03.2022") return "red!important";
-      else if (DueDate > 200) return "white!important";
-      else return "green";
-    },
-    edit(index, item) {
-      if (!this.editing) {
-        this.editing = item;
-        this.editingIndex = index;
-      } else {
-        this.editing = null;
-        this.editingIndex = -1;
-      }
-    },
-    filter(item, queryText, itemText) {
-      if (item.header) return false;
-
-      const hasValue = (val) => (val != null ? val : "");
-
-      const text = hasValue(itemText);
-      const query = hasValue(queryText);
-
-      return (
-        text.toString().toLowerCase().indexOf(query.toString().toLowerCase()) >
-        -1
-      );
-    },
-
-    printSection() {
-      this.$htmlToPaper("printSection");
-    },
-    onChangePage(pageOfItems) {
-      // update page of items
-      this.pageOfItems = pageOfItems;
-    },
-  },
-
-  mounted() {
-    this.fetchPrintStuff();
-
-    // a Vuex action to get stuff to print from server
-  },
-
-  data: () => ({
-    drawer: null,
-    search1: "",
-    filter1: {},
-    sortDesc: false,
-    page: 1,
-    itemsPerPage: 4,
-    sortBy: "filters",
-    switch1: true,
-    switch2: false,
-    switch3: false,
-    img:imgUrl,
-
-    keys: [
-      "name",
-      "created",
-      "Customer",
-      "Amount",
-      "Gateway",
-      "Status",
-      "Actions",
-    ],
-    clickssub: [
-      { title: "option1" },
-      { title: "Click2" },
-      { title: "Click3" },
-      { title: "Click2" },
-    ],
-    clickhis: [
-      { title: "option1" },
-      { title: "Click2" },
-      { title: "Click3" },
-      { title: "Click2" },
-    ],
-  e1: {state: 'Reports',},
-    report: [ { state: 'Reports'},
+  export default {
+    data: () => ({
+      drawer: false,
+      group: null,
+      items: [
+        {
+          title: 'Foo',
+          value: 'foo',
+        },
+        {
+          title: 'Bar',
+          value: 'bar',
+        },
+        {
+          title: 'Fizz',
+          value: 'fizz',
+        },
+        {
+          title: 'Buzz',
+          value: 'buzz',
+        },
+      ],
+      items2: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
+      e1: {state: 'Reports'},
+      report: [ { state: 'Reports'},
         { state: 'Transactions' },
         { state: 'lorem' },
         { state: 'lorem' },],
-    item: ["Foo", "Bar", "Fizz", "Buzz"],
-    gateway: ["ottu", "visa", "visa1", "option"],
-    modify: ["122", "33", "3", "option1"],
+      admins: [
+        ['Management', 'mdi-account-multiple-outline'],
+        ['Settings', 'mdi-cog-outline'],
+      ],
+      cruds: [
+        {title:"arwa"},
+        {title:"amora"}
+      ],
+        switch1: true,
+    switch2: false,
+    switch3: false,
+    }),
 
-    pending: ["1", "2", "3", "4"],
-
-    date: ["11", "22", "11", "22"],
-
-    tabs: null,
-    text: "",
-    summary: [
-      {
-        name: "Payment Requests",
-        count: 255,
-        amount: "40,000.000",
-        currency: "KWD",
+    watch: {
+      group () {
+        this.drawer = false
       },
-      {
-        name: "Real Estate",
-        count: 255,
-        amount: "40,000.000",
-        currency: "KWD",
-      },
-      {
-        name: "Booking",
-        count: 255,
-        amount: "40,000.000",
-        currency: "KWD",
-      },
-    ],
-    subscription: [
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.05.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-    ],
-    subscriptionhistory: [
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-      {
-        invoice: "021394",
-        merchantsub: "online.hashi.com",
-        typesub: "Subscription",
-        FromDate: "22.03.2022",
-        ToDate: "22.03.2022",
-        DueDate: "22.03.2022",
-        Description: "Lorem ipsum dolor sit amet, consectetuer",
-        Total: "120.000",
-        Currency: "KWD",
-        Status: "Pending",
-        actions: "",
-      },
-    ],
-    checkbox2: false,
-    activator: null,
-    attach: null,
-    colors: ["#F89750", "#F89750", "indigo", "cyan", "teal", "orange"],
-    editing: null,
-    editingIndex: -1,
-    items: [
-      { header: "Select an option or create one" },
-      {
-        text: "option3",
-        color: "#F89750",
-      },
-      {
-        text: "option1",
-        color: "#F89750",
-      },
-    ],
-    nonce: 1,
-    menu: false,
-    model: [
-      {
-        text: "option2",
-        color: "blue",
-      },
-    ],
-    x: 0,
-    search: null,
-    y: 0,
-  }),
-
-  watch: {
-    model(val, prev) {
-      if (val.length === prev.length) return;
-
-      this.model = val.map((v) => {
-        if (typeof v === "string") {
-          v = {
-            text: v,
-            color: this.colors[this.nonce - 1],
-          };
-
-          this.items.push(v);
-
-          this.nonce++;
-        }
-
-        return v;
-      });
     },
-  },
-};
+  }
 </script>

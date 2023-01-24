@@ -34,7 +34,7 @@
               <v-col>
 
             <img style="width: 100%; height: 125px" :src="lock"/></v-col>
-                  <h1 class="sign-in-title font-weight-bold mb-3">
+            <h1 class="sign-in-title font-weight-bold mb-3">
             Successfully Enabled!
           </h1>
 
@@ -68,6 +68,12 @@
     </v-row>
   </v-container>
 </template>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  body,html,span,p,h1,li, a{
+    font-family: 'Public Sans', sans-serif !important;
+  }
+</style>
 <style>
 .bg-main {
   background: #2a2a33;
@@ -166,6 +172,15 @@ width: 100%!important;
 }
 .main-year{
   flex:unset!important;
+}
+@media(max-width:1200px){
+  .sign-form{
+  margin-bottom:50px;
+  margin-top: 50px;
+}
+}
+.sign-in-title{
+  text-align: center;
 }
 </style>
 

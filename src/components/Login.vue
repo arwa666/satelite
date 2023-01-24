@@ -98,6 +98,13 @@
   </v-container>
 </template>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  body,html,span,p,h1,li, a{
+    font-family: 'Public Sans', sans-serif !important;
+  }
+</style>
+<style>
+
 .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
   > .v-input__control
   > .v-input__slot,
@@ -243,6 +250,12 @@ body {
 .col-12{
 height: 100vh;
 padding: 0px 12px 0px;}
+@media(max-width:1200px){
+  .sign-form{
+  margin-bottom:50px;
+  margin-top: 50px;
+}
+}
 </style>
 <style >
 .v-app-bar {

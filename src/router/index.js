@@ -38,6 +38,38 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Login3.vue'),
       },
+      {
+        path: 'ottu-settings',
+        name: 'ottu-settings',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/ottu-settings.vue'),
+      },
+      {
+        path: 'transaction',
+        name: 'transaction',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Transaction.vue'),
+      },
+      {
+        path: 'subscription',
+        name: 'subscription',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/subscription.vue'),
+      },
+      {
+        path: 'reset-password',
+        name: 'reset-passowrd',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Login4.vue'),
+      },
     ],
   },
 ]

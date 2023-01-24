@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid >
     <v-row  class="mobile-row">
       <v-col sm="12" md="12" lg="6" cols="12" style="padding-top: 0px;">
         <div class="bg-main" style="width: 100%; height: 100vh">
@@ -21,7 +21,7 @@
       </v-col>
       <v-col class="sign-form"  sm="12" md="12" lg="6" cols="12" style="padding-top: 0px;">
         <div
-        class="login "
+          class="login"
           style="
             box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.04);
             padding: 64px 60px 56px;
@@ -30,8 +30,8 @@
             width: 557px;
           "
         >
-                   <h1 class="sign-in-title font-weight-bold mb-3">
-            Two Factor authentication
+          <h1 class="sign-in-title font-weight-bold mb-3">
+            Reset Your Password
           </h1>
 
           <p
@@ -40,34 +40,23 @@
               color: #8083a3;
               font-size: 14px;
               font-weight: 400;
-              margin-bottom: 50px;
             "
             class="subheading font-weight-regular"
           >
-            You must set up two factor authentication to go inline with our
-            security guidlines
+          Enter the email address associated with your account and we'll send you a link to reset your password
           </p>
-          <label class="phone__label">Phone Number</label>
-          <v-col id="phone_number" style="position: relative">
-            <v-select
-              v-model="select"
-              :hint="`${select.state}, ${select.abbr}`"
-              :items="items"
-              item-title="state"
-              item-value="abbr"
-              label="Select"
-              persistent-hint
-              return-object
-              single-line
-            ></v-select>
-            <v-text-field class="phone_num"
-              style="font-weight: 700;
-               font-size: 14px!important;color:#171721"
-              label=""
-              append-icon="mdi-phone-outline"
+          <v-col>
+            <v-text-field
+              class="input-main"
+              label="Email"
+              append-icon="mdi-email-outline"
+              v-model="email"
+              style="color: #8083a3; font-size: 14px; font-weight: 500"
+
             ></v-text-field>
 
           </v-col>
+
 
           <div class="d-flex justify-center">
             <v-btn
@@ -75,17 +64,17 @@
                 background-color: #fb923c;
                 width: 420px;
                 height: 54px;
-                color: #fff !important;
+                color: #fff;
                 margin-top: 52px;
               "
-              to="/twofa"
             >
-              Verify
+              RESET PASSWORD
             </v-btn>
           </div>
         </div>
-        <v-card-text class="main-year"
 
+        <v-card-text
+          class="main-year"
           style="
             color: rgba(26, 26, 26, 0.7);
             font-size: 14px !important;
@@ -103,136 +92,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
   body,html,span,p,h1,li, a{
     font-family: 'Public Sans', sans-serif !important;
-  } 
-</style>
-<style >
-.bg-main {
-  background: #2a2a33;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.v-main{
-  padding-top:0px!important
-}
-#phone_number {
-  border: 1px solid #8083a3;
-  width: 420px;
-  height: 55px;
-  border-radius: 5px;
-}
-.theme--light.v-select .v-select__selections{
-font-weight: 700;
-font-size: 14px;
-color: #8083A3!important;
-}
-#phone_number input{
-font-size:14px;
-font-weight:700
-
-}
-.v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
-  > .v-input__control
-  > .v-input__slot,
-.v-text-field.v-text-field--enclosed .v-text-field__details {
-  border: 1px solid #e4e6e8 !important;
-  background: transparent;
-}
-.v-text-field.v-text-field--enclosed .v-text-field__details {
-  border: 0 !important;
-}
-.v-application a {
-  color: #8083a3 !important;
-  text-decoration: none;
-}
-.theme--light.v-input input,
-.theme--light.v-input textarea {
-  color: #171721;
-  font-size: 14px;
-  font-weight: bold;
-}
-.v-text-field:focus {
-  border-color: #e4e6e8;
-}
-.sign-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-body {
-  height: 100vh;
-}
-#phone_number .v-select {
-  /* position: absolute;
-  top: -5px; */
-  width: 100px;
-}
-.theme--light.v-text-field > .v-input__control > .v-input__slot:before {
-  display: none;
-}
-.v-messages__message {
-  display: none;
-}
-#phone_number .v-label.theme--light {
-  top: -40px !important;
-  left: -120px !important;
-}
-#phone_number .v-text-field .v-label--active {
-  transform: none!important;
-}
-
-.v-text-field > .v-input__control > .v-input__slot:after{
-  display: none;
-}
-#phone_number .v-input.v-input--is-focused.theme--light >.v-input__control > .v-input__slot {
-border: 0!important;
-}
-
-.mobile-year {
-  display: none;
-}
-@media (max-width: 1240px) {
-  .main-img {
-    height: auto !important;
-    width: auto!important;
-    display: block;
-    margin: auto;
   }
-  .mobile-row {
-    flex-direction: column-reverse;
-  }
-  .main-year {
-    display: none;
-  }
-  .mobile-year {
-    display: block;
-  }
-}
-@media (max-width: 768px) {
-  .login {
-    width: 100% !important;
-    padding: 25px 15px 15px !important;
-  }
-    .main-img {
-    width: 100%!important;
-  }
-  .sign-in-title {
-    font-size: 30px !important;
-  }
-.v-btn{
-width: 100%!important;
-}
-#phone_number{
-  width: 100%;
-}
-}
-@media (max-width:575px) {
-   .sign-in-title {
-    font-size: 25px !important;
-  }
-
-}
 </style>
 <style>
 .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded)
@@ -380,6 +240,12 @@ body {
 .col-12{
 height: 100vh;
 padding: 0px 12px 0px;}
+@media(max-width:1200px){
+  .sign-form{
+  margin-bottom:50px;
+  margin-top: 50px;
+}
+}
 </style>
 <style >
 .v-app-bar {
@@ -388,52 +254,18 @@ padding: 0px 12px 0px;}
 #head {
   display: none !important;
 }
-.phone_num{
-  width: calc(100% - 100px);
-}
-#phone_number{
-  display: flex;
-  align-items: center;
-  padding-inline-start: 0px;
-  padding-inline-end:16px;
-}
-.phone__label{
-    font-weight: 500;
-    font-size: 14px !important;
-    color: #8083a3 !important;
-    margin-bottom:15px;
-    display: block;
-}
-#phone_number .v-field--variant-filled .v-field__overlay{
-  display:none;
-}
-@media(max-width:1200px){
-  .sign-form{
-  margin-bottom:50px;
-  margin-top: 50px;
-}
-}
 </style>
-
 
 <script>
 import imgUrl from "../assets/bg-main.svg";
-export default {
-  name: "login-reset-passord",
 
-
-  data() {
-    return {
-      select: { state: '+965', abbr: 'kw' },
-        items: [
-        { state: "+965", abbr: "kw" },
-        { state: "+963", abbr: "sy" },
-        { state: "+961", abbr: "lb" },
-        ],
-      img:imgUrl
-
-    };
-
-  },
-};
+ export default{
+  name:"log-in",
+   data(){
+    return{
+      img:imgUrl,
+      email:"Name@gmail.com"
+    }
+   }
+ }
 </script>
